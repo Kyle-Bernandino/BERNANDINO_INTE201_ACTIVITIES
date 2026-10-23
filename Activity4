@@ -1,0 +1,51 @@
+package acts;
+import java.util.Scanner;
+/**
+ *
+ * @author josep
+ */
+public class Activity4 {
+    public static void main(String[] args) {
+        System.out.println("=====Number and Square Printerr=====");
+        for (int i = 1; i <=10; i++)
+        {
+            System.out.println("Number: " + i + ", Square: " + (i * i));    
+        }
+        for (int i = 1; i <=20; i++)
+        {
+            System.out.println("Number: " + i + ", Square: " + (i * i)); 
+            /*Output updates correctly*/
+        }
+        System.out.println("=====Sum Until Sentinental Value");
+        Scanner scn = new Scanner(System.in);
+        int total = 0;
+        System.out.println("Enter integers (enter -1 to stop):");
+        int num = scn.nextInt();
+        
+        while (num !=-1){
+            total += num;
+            num = scn.nextInt();
+        }
+        System.out.println("Final total: " + total);
+        
+        System.out.println("=====Pattern Generator With Early Exit=====");
+        int size = 4;
+
+        for (int i = 1; i <= size; i++) {
+            
+            if (i == 3) {
+                continue; 
+            }
+
+            for (int j = 1; j <= size; j++) {
+                
+                if (j == 4) {
+                    break; 
+                }
+
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+}
+}
