@@ -1,0 +1,69 @@
+package acts;
+import java.util.Scanner;
+import java.util.Arrays;
+/**
+ *
+ * @author josep
+ */
+public class Activity5 {
+    public static void main(String[] args) {
+        String[] favoriteThings = {"ABI", "Dota2", "Valorant", "LOL", "ML"};
+
+        System.out.println("My Favorite Things:");
+        
+        for (int i = 0; i < favoriteThings.length; i++) {
+            System.out.println((i + 1) + ". " + favoriteThings[i]);
+        }
+
+        System.out.println("Total array length: " + favoriteThings.length);
+        
+        System.out.println("=====Class Statistic Calculator=====");
+
+        int[] scores = {75, 78, 75, 79, 74, 75, 76, 70, 87};
+
+        int ttl = 0;
+        int highest = scores[0];
+        int lowest = scores[0];
+
+        for (int i = 0; i < scores.length; i++) {
+            ttl += scores[i];
+
+            if (scores[i] > highest) {
+                highest = scores[i];
+            }
+
+            if (scores[i] < lowest) {
+                lowest = scores[i];
+            }
+        }
+
+        double avg = (double) ttl / scores.length;
+
+        System.out.println("Total Sum: " + ttl);
+        System.out.println("Class Average: " + avg);
+        System.out.println("Highest Score: " + highest);
+        System.out.println("Lowest Score: " + lowest);
+        
+        System.out.println("=====Search and Sort Mini tool=====");
+        int[] scores1 = {75, 78, 75, 79, 74, 75, 76, 70, 87};
+        int target = 87;
+
+        int foundIndex = -1;
+        for (int i = 0; i < scores.length; i++) {
+            if (scores[i] == target) {
+                foundIndex = i;
+                break;
+            }
+        }
+        if (foundIndex != -1) {
+            System.out.println("Linear Search: Target " + target + " found at index " + foundIndex + ".");
+        } else {
+            System.out.println("Linear Search: Target " + target + " not found.");
+        }
+        int[] sortedScores = Arrays.copyOf(scores, scores.length);
+        Arrays.sort(sortedScores);
+        System.out.println("Original array: " + Arrays.toString(scores));
+        System.out.println("Sorted copy:    " + Arrays.toString(sortedScores));
+        
+    }
+}
