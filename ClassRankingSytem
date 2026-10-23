@@ -1,0 +1,87 @@
+package acts;
+import java.util.Arrays;
+/**
+ *
+ * @author josep
+ */
+public class ClassRankingSystem {
+    static class Student {
+        String name;
+        int[] quiz;
+        double avg;
+
+        public Student(String name, int[] quiz) {
+            this.name = name;
+            this.quiz = quiz;
+            this.avg= calculateAverage();
+        }
+
+        private double calculateAverage() {
+            if (quiz.length == 0) return 0.0;
+            int sum = 0;
+            for (int score : quiz) {
+                sum += score;
+            }
+            return (double) sum / quiz.length;
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("=== Class Ranking System ===\n");
+
+        // Raw quiz data and student names
+        String[] studentNames = {"Kyle", "Kevin", "Jacob", "Kris", "Karl"};
+        int[][] rawQuizData = {
+            {88, 92, 95, 90},
+            {75, 80, 85, 82},
+            {90, 93, 91, 91},
+            {60, 70, 65, 75},
+            {90, 93, 91, 91} 
+        };
+        Student[] students = new Student[studentNames.length];
+        for (int i = 0; i < studentNames.length; i++) {
+            students[i] = new Student(studentNames[i], rawQuizData[i]);
+        }
+        for (int i = 0; i < students.length - 1; i++) {
+            for (int j = 0; j < students.length - i - 1; j++) {
+                if (students[j].avg < students[j + 1].avg) {
+                    Student temp = students[j];
+                    students[j] = students[j + 1];
+                    students[j + 1] = temp;
+                }
+            }
+        }
+        System.out.println("Rank\tName\t\tAverage");
+        System.out.println("---------------------------------");
+        int displayRank = 1;
+        for (int i = 0; i < students.length; i++) {
+            if (i > 0 && students[i].avg != students[i - 1].avg) {
+                displayRank = i + 1;
+            }
+            System.out.println(displayRank + "\t\t" + students[i].name + "\t\t" + students[i].avg);
+        }
+        String searchTarget = "Kyle";
+        int studentRank = findStudentRank(students, searchTarget);
+
+        System.out.println("\n--- Linear Search ---");
+        if (studentRank != -1) {
+            System.out.println("Student '" + searchTarget + "' is found at rank " + studentRank + ".");
+        } else {
+            System.out.println("Student '" + searchTarget + "' not found.");
+        }
+    }
+    private static int findStudentRank(Student[] students, String targetName) {
+        for (int i = 0; i < students.length; i++) {
+            if (students[i].name.equalsIgnoreCase(targetName)) {
+                int rank = 1;
+                for (int j = 0; j <= i; j++) {
+                    if (j > 0 && students[j].avg != students[j - 1].avg) {
+                        rank = j + 1;
+                    }
+                }
+                return rank;
+            }
+        }
+        return -1;
+    }
+}
