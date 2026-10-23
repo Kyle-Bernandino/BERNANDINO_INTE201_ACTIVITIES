@@ -1,0 +1,135 @@
+package acts;
+
+/**
+ *
+ * @author josep
+ */
+public class Activity1 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        System.out.println("=======Personal File Printer=======");
+        
+         String Name = "Joseph Kyle Valmonte Bernandino";
+         System.out.println("Name: " + Name);
+         
+        int age = 21;
+        System.out.println("Age: " + age + " Years Old");
+        
+        double height = 169;
+        System.out.println("Height: "+ height + " cm");
+        
+        char initial = 'V';
+        System.out.println("Initials: " + initial);
+        
+        boolean status = true;
+        System.out.println("Student Status: " + status + "\n");
+        
+        
+        System.out.println("=======Type Safe Shopping Calculator=======");
+        
+        String storeName = "Malupitang Tindahan Ni Kyle";
+        System.out.println(storeName);
+        
+        int quantity = 10;
+        
+        double unitPrice = 237.21;
+        
+        /*totalCost shoulb be double because unitPrice is also double where the
+        value of it has decimal value, if one of them is int, it will have
+        an error*/
+        
+        double totalCost = quantity * unitPrice;
+        
+        System.out.println("Quantity: " + quantity);
+        System.out.println("Unit Price: P" + unitPrice);
+        System.out.println("Total Price: P" + totalCost + "\n");
+        
+        
+        System.out.println("=======Unit Casting Converter=======");
+        double Centimeters = 256.92;
+        /*Explicit Casting | Double to int*/
+        int wMeters = (int) (Centimeters / 100);
+        double rCentimeters = Centimeters % 100;
+        
+        System.out.println("Total Centimeters: " + Centimeters + "cm");
+        System.out.println("Equivalent " + wMeters + " meters and " + rCentimeters + "cm" + "\n");
+        
+        /*Implicit Casting | Int to double*/
+        /* We don't need to use explicit cast because double has wider range
+        of value and Java can convert the data safely without loss
+        */
+        int Value = 85;
+        double doubleValue = Value;
+        
+        System.out.println("=======Implicit Casting=======");
+        System.out.println("Original Value: " + Value);
+        System.out.println("Enlarged Value: " + doubleValue + "\n");
+        
+        /*Explicit Casting | Int to double*/
+        /*We need to use Explicit casting because converting int to double
+        shortens the decimal value that will result a loss of decimal accuracy
+        */
+        double Value2 = 85.25;
+        int integerValue = (int) Value2;
+        
+        System.out.println("=======Explicit Casting=======");
+        System.out.println("Original Value: " + Value2);
+        System.out.println("Enlarged Value: " + integerValue + "\n");
+        
+        
+        System.out.println("=======Overflow and Reference Investigator=======");
+        byte maxByte = 127;
+        System.out.println("Original Maximum Byte Value: " + maxByte);
+        
+        maxByte++;
+        System.out.println("Incremented Maximum Byte Value: " + maxByte + "\n");
+        
+        String string1 = new String("Test");
+        String string2 = new String("Test");
+        String string3 = "Test";
+        
+        System.out.println("=======String Comparing=======");
+        
+        /*String 1 & String 2*/
+        System.out.println("String 1 & String 2");
+        System.out.println("String 1 == String 2: " + (string1 == string2));
+        System.out.println("string1.equals(string2): " + string1.equals(string2) + "\n");
+        /* String 1 & 2 are created using new String, they have two different
+        boxes in the memory/address that is why it is false*/
+        
+         /*String 1 & String 3*/
+         System.out.println("String 1 & String 3");
+        System.out.println("String 1 == String 3: " + (string1 == string3));
+        System.out.println("string1.equals(string3): " + string1.equals(string3) + "\n");
+        /* String 1 is created using new String and String 3 comes from String
+        pool, both strings are stored from different places*/
+        
+         /*String 2 & String 3*/
+         System.out.println("String 2 & String 3");
+        System.out.println("String 2 == String 3: " + (string2 == string3));
+        System.out.println("string2.equals(string3): " + string2.equals(string3) + "\n");
+        /* Just like String 1 & 3, String 2 is created using new String and 
+        String 3 comes from String pool, both strings are stored from 
+        different places*/
+
+        /* For .equals(), all of the said string comparison above have the same
+        exact letter which is "Test" that is why all three comparison are true*/
+
+        System.out.println("=======Array Reference=======");
+        int[] primaryArray = {10, 20, 30};
+        int[] sharedArray = primaryArray; // Both variables point to the exact same array object in memory
+
+        System.out.println("Before modification - primaryArray[0]: " + primaryArray[0]);
+        System.out.println("Before modification - sharedArray[0]: " + sharedArray[0]);
+
+        // Modify through the shared reference variable
+        sharedArray[0] = 999;
+
+        System.out.println("After modification via sharedArray - primaryArray[0]: " + primaryArray[0]);
+        System.out.println("After modification via sharedArray - sharedArray[0]: " + sharedArray[0]);        
+    }
+    
+}
