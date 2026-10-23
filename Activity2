@@ -1,0 +1,211 @@
+package acts;
+import java.util.Scanner;
+/**
+ *
+ * @author josep
+ */
+public class Activity2 {
+    public static void main(String[] args) {
+        Scanner scn = new Scanner(System.in);
+        
+        System.out.println("=====Four-Function Calculator=====");
+        
+        System.out.print("Input Number A: ");
+        int A = scn.nextInt();
+        
+        System.out.print("Input Number B: ");
+        int B = scn.nextInt();
+        
+        System.out.println("ADDITION (+): " + ( A + B ));
+        System.out.println("SUBTRACTION (-): " + ( A - B ));
+        System.out.println("MULTIPLICATION (*): " + ( A * B ));
+        
+        /*DIVISION AND MODULOS Behave differently when negative data included*/
+        
+        if (B != 0) {
+            System.out.println("DIVISION (/): " + ((double) A / B)); /*integer division truncates towards zero (e.g., -5 / 2 is -2)*/
+            System.out.println("MODULOS (%): " + (A % B)); /*the modulo operator (%), Java follows the sign of the *dividend* (the left operand)*/
+        } else {
+            System.out.println("DIVISION (/): Error (Division by zero)");
+            System.out.println("MODULOS (%): Error (Modulo by zero)");
+        }
+
+        
+        System.out.println("=====GRADE THRESHOLD CHECKER=====");
+        
+        
+        Scanner scn2 = new Scanner(System.in);
+        
+        System.out.print("Input Student's Average Grade: "); 
+        double avg = scn2.nextDouble();
+        System.out.print("Input Student's Number of Absences: ");
+        int abs = scn2.nextInt();
+        
+        boolean Status = (avg >= 75 && abs <= 3) || (avg >= 90);
+        
+        System.out.println("\n--- Evaluation Result ---");
+        if (Status) {
+            System.out.println("Result: PASS[cite: 2]");
+            if (avg >= 90) {
+                System.out.println("Reasoning: The student passed because their average grade is 90 or above (Grade: " + avg + "), regardless of absences.");
+            } else {
+                System.out.println("Reasoning: The student passed because their average grade is at least 75 (Grade: " + avg + ") and their absences are 3 or fewer (Absences: " + abs + ").");
+            }
+        } else {
+            System.out.println("Result: FAIL");
+            System.out.println("Reasoning: The student did not meet the criteria. An average below 75 requires passing grades with 3 or fewer absences, or an exceptional grade of 90.");
+        }
+        
+        double bal = 1000.0;
+        System.out.println("Initial Balance: P" + bal);
+
+        bal += 250.0;
+        System.out.println("After first step (+= 250.0): P" + bal);
+
+        bal *= 1.05;
+        System.out.println("After second step (*= 1.05): P" + bal);
+
+        bal += 500.0; 
+        System.out.println("After third step (+= 500.0): P" + bal);
+
+        int count = 5;
+        System.out.println("Starting count value: " + count);
+        
+        System.out.println("Result of printing count++: " + count++); 
+        System.out.println("Value of count immediately after count++: " + count);
+
+        System.out.println("\n------------------------------------\n");
+
+        count = 5; 
+        System.out.println("Reset count value: " + count);
+        
+        System.out.println("Result of printing ++count: " + ++count);
+        System.out.println("Value of count immediately after ++count: " + count);
+        
+        System.out.println("=== ARENA BREAKOUT: INFINITE — PRECEDENCE PUZZLE SOLVER ===\n");
+
+        // ================================================================================
+        // PUZZLE 1: Bullet Penetration & Flesh Health Calculation
+        // Scenario: A T4 ammo bullet hits a T3 chest rig. If ammo tier exceeds armor class, 
+        //           flesh damage applies directly; otherwise, damage is reduced.
+        // ================================================================================
+        int chestHP = 85;
+        int bulletBaseDamage = 52;
+        int ammoPenetrationTier = 4;
+        int armorClass = 3;
+        int armorDurability = 40;
+
+        /*
+         * PREDICTED RESULT: 35
+         * Expression: chestHP - bulletBaseDamage / (ammoPenetrationTier >= armorClass ? 1 : 2) + ++armorDurability % 3
+         *
+         * My Step-by-Step Prediction:
+         * 1. Prefix Increment (++armorDurability): Increments durability from 40 to 41.
+         * 2. Parentheses & Ternary: (4 >= 3) evaluates to true -> returns 1.
+         * 3. Division (/): 52 / 1 = 52.
+         * 4. Modulo (%): 41 % 3 = 2.
+         * 5. Subtraction (-) and Addition (+): 
+         *    - 85 - 52 = 33
+         *    - 33 + 2 = 35
+         *
+         * Predicted final integer result: 35
+         */
+
+        System.out.println("--- Puzzle 1: Bullet Penetration & Flesh HP ---");
+        int remainingChestHP = chestHP - bulletBaseDamage / (ammoPenetrationTier >= armorClass ? 1 : 2) + ++armorDurability % 3;
+        System.out.println("Actual Result (Remaining Chest HP): " + remainingChestHP);
+
+        /*
+         * PRECEDENCE EXPLANATION:
+         * 1. ++armorDurability (Prefix) executes FIRST, changing 40 to 41.
+         * 2. Parentheses force evaluation of (ammoPenetrationTier >= armorClass ? 1 : 2) next, returning 1.
+         * 3. Division (/) and Modulo (%) run next from left to right: (52 / 1 = 52) and (41 % 3 = 2).
+         * 4. Subtraction (-) and Addition (+) run last: (85 - 52 + 2 = 35).
+         */
+
+
+        System.out.println("\n--------------------------------------------------\n");
+
+
+        // ================================================================================
+        // PUZZLE 2: Armor Durability Loss & Blunt Trauma Impact
+        // Scenario: When a bullet hits an armored vest, armor durability degrades over time 
+        //           and blunt trauma transfers to the user.
+        // ================================================================================
+        int armorPoints = 60;
+        int bulletArmorDamage = 25;
+        int shotsFired = 2;
+
+        /*
+         * PREDICTED RESULT: 37
+         * Expression: armorPoints - shotsFired++ * bulletArmorDamage / 2 + --armorPoints % 4
+         *
+         * My Step-by-Step Prediction:
+         * 1. Prefix Decrement (--armorPoints): Decrements armorPoints from 60 to 59 immediately.
+         * 2. Postfix Increment (shotsFired++): Supplies current value (2) to calculation, then becomes 3.
+         * 3. Multiplication (*), Division (/), Modulo (%):
+         *    - 2 * 25 = 50
+         *    - 50 / 2 = 25
+         *    - 59 % 4 = 3
+         * 4. Subtraction (-) and Addition (+):
+         *    - 59 - 25 = 34  (Left-side armorPoints was modified to 59 in step 1!)
+         *    - 34 + 3 = 37
+         *
+         * Predicted final integer result: 37
+         */
+
+        System.out.println("--- Puzzle 2: Armor Durability Degradation ---");
+        int finalArmorPoints = armorPoints - shotsFired++ * bulletArmorDamage / 2 + --armorPoints % 4;
+        System.out.println("Actual Result (Final Armor Points): " + finalArmorPoints);
+
+        /*
+         * PRECEDENCE EXPLANATION:
+         * 1. --armorPoints (Prefix) mutates the variable in memory to 59 BEFORE evaluation completes.
+         * 2. shotsFired++ (Postfix) passes 2 into the multiplication (2 * 25 / 2 = 25).
+         * 3. Because --armorPoints changed the value in memory first, the starting operand on the left side 
+         *    reads 59, making the final arithmetic (59 - 25 + 3 = 37).
+         */
+
+
+        System.out.println("\n--------------------------------------------------\n");
+
+
+        // ================================================================================
+        // PUZZLE 3: Emergency Extraction Eligibility Check
+        // Scenario: Determines if an operator can successfully extract with Koen loot value, 
+        //           stamina checks, or an active red flare signal.
+        // ================================================================================
+        int koenLootValue = 45000;
+        int stamina = 20;
+        boolean flareActive = true;
+
+        /*
+         * PREDICTED RESULT: true
+         * Expression: koenLootValue + 5000 >= 50000 && stamina-- > 25 || flareActive
+         *
+         * My Step-by-Step Prediction:
+         * 1. Arithmetic (+): (45000 + 5000) -> 50000
+         * 2. Relational (>=): 50000 >= 50000 -> true
+         * 3. Postfix Decrement / Relational (stamina-- > 25): 
+         *    - Compares current stamina (20) > 25 -> false
+         *    - Decrements stamina to 19 after comparison.
+         * 4. Logical AND (&&): true && false -> false
+         * 5. Logical OR (||): false || flareActive (true) -> true
+         * 
+         * Predicted final boolean result: true
+         */
+
+        System.out.println("--- Puzzle 3: Emergency Extraction Eligibility ---");
+        boolean canExtract = koenLootValue + 5000 >= 50000 && stamina-- > 25 || flareActive;
+        System.out.println("Actual Result (Can Extract): " + canExtract);
+
+        /*
+         * PRECEDENCE EXPLANATION:
+         * 1. Postfix operator (stamina--) returns 20 for comparison, then decrements stamina to 19.
+         * 2. Arithmetic (+) executes before relational operators (>=, >).
+         * 3. Relational operators (>=, >) evaluate next into boolean values (true and false).
+         * 4. Logical AND (&&) has higher precedence than Logical OR (||), evaluating (true && false) -> false.
+         * 5. Logical OR (||) executes last, returning true because flareActive is true.
+         */
+    }
+}
